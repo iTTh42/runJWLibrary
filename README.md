@@ -17,7 +17,7 @@ Dieses Repository enthält ein PowerShell-Skript zur Automatisierung der Fenster
 
 ### Konfigurationsdatei
 
-Erstellen Sie eine `config.json` im Hauptverzeichnis des Projekts mit folgendem Inhalt:
+Konfigurieren Sie die `config.json` im Hauptverzeichnis des Projekts mit folgendem Inhalt:
 
 ```json
 {
