@@ -62,14 +62,6 @@ if ($jwProcessFound -and $proc.MainWindowHandle -ne 0) {
     Write-Host "Passe Größe und Position des JW-Library-Fenster an..."
     [NativeMethods]::MoveWindow($proc.MainWindowHandle, $x, $y, $width, $height, $true)
 
-    Write-Host "Bringe JW Library in den Vordergrund..."
-    [NativeMethods]::SetForegroundWindow($proc.MainWindowHandle)
-
-    Write-Host "Sende Tastenanschläge..."
-    #Start-Sleep -Seconds 1
-    [System.Windows.Forms.SendKeys]::SendWait("{TAB 5}{DOWN 3}{ENTER}")
-
-    Write-Host "Tastenanschläge gesendet."
     Write-Host "Größe und Position des JW-Library-Fenster angepasst."
 } else {
     Write-Host "Konnte das JW-Library-Fenster für die Anpassung nicht finden."
