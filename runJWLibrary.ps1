@@ -1,17 +1,13 @@
-﻿# Lese die Konfiguration aus der Datei
 $configPath = ".\config.json"
 $configJson = Get-Content $configPath | ConvertFrom-Json
 
-# Fensterposition und -größe aus der Konfiguration lesen
 $x = $configJson.windowPosition.x
 $y = $configJson.windowPosition.y
 $width = $configJson.windowPosition.width
 $height = $configJson.windowPosition.height
 
-# Überprüfung der Monitoranzahl aus der Konfiguration lesen
 $monitorCountCheck = $configJson.monitorCountCheck
 
-# Lade die benötigte Assembly für die Arbeit mit Fenstern und Monitoren
 Add-Type -AssemblyName System.Windows.Forms
 
 if ($monitorCountCheck -eq $true) {
@@ -23,12 +19,12 @@ if ($monitorCountCheck -eq $true) {
             break
         } else {
             Write-Host "Warte auf zweiten Monitor..."
-            Start-Sleep -Seconds 5
+            Start-Sleep -Seconds 2
         }
     } while ($monitorCount -le 1)
 }
 
-Start-Sleep -Seconds 5
+Start-Sleep -Seconds 2
 
 Write-Host "Öffne JW Library"
 Start-Process "explorer.exe" "shell:appsFolder\WatchtowerBibleandTractSo.45909CDBADF3C_5rz59y55nfz3e!App"
@@ -42,6 +38,9 @@ Add-Type @"
   public static class NativeMethods {
     [DllImport("user32.dll", SetLastError = true)]
     public static extern bool MoveWindow(IntPtr hWnd, int X, int Y, int nWidth, int nHeight, bool bRepaint);
+
+    [DllImport("user32.dll")]
+    public static extern bool SetForegroundWindow(IntPtr hWnd);
   }
 "@
 
@@ -62,6 +61,15 @@ do {
 if ($jwProcessFound -and $proc.MainWindowHandle -ne 0) {
     Write-Host "Passe Größe und Position des JW-Library-Fenster an..."
     [NativeMethods]::MoveWindow($proc.MainWindowHandle, $x, $y, $width, $height, $true)
+
+    Write-Host "Bringe JW Library in den Vordergrund..."
+    [NativeMethods]::SetForegroundWindow($proc.MainWindowHandle)
+
+    Write-Host "Sende Tastenanschläge..."
+    #Start-Sleep -Seconds 1
+    [System.Windows.Forms.SendKeys]::SendWait("{TAB 5}{DOWN 3}{ENTER}")
+
+    Write-Host "Tastenanschläge gesendet."
     Write-Host "Größe und Position des JW-Library-Fenster angepasst."
 } else {
     Write-Host "Konnte das JW-Library-Fenster für die Anpassung nicht finden."
