@@ -1,6 +1,6 @@
 # JW Library Automatisierungsskript
 
-Dieses Repository enthält ein PowerShell-Skript zur Automatisierung der Fensterpositionierung und -größe der JW Library auf Windows-Systemen. Es liest Konfigurationsdaten aus einer JSON-Datei, überprüft optional die Anzahl der angeschlossenen Monitore und passt das JW Library-Fenster entsprechend an. Weiterhin wird beschrieben, wie man eine VBScript-Verknüpfung zur vereinfachten Skriptausführung erstellt und den gesamten Ordner in `C:\data\` verschiebt.
+Dieses Repository enthält ein PowerShell-Skript zur Automatisierung der Fensterpositionierung und -größe der JW Library auf Windows-Systemen. Es liest Konfigurationsdaten aus einer JSON-Datei, überprüft optional die Anzahl der angeschlossenen Monitore und passt das JW Library-Fenster entsprechend an. Weiterhin wird beschrieben, wie man eine VBScript-Verknüpfung zur vereinfachten Skriptausführung erstellt und den gesamten Ordner in `C:\opt\` verschiebt.
 
 ## Voraussetzungen
 
@@ -12,8 +12,8 @@ Dieses Repository enthält ein PowerShell-Skript zur Automatisierung der Fenster
 
 ### Projektordner vorbereiten
 
-- Stellen Sie sicher, dass der Ordner `C:\data\` auf Ihrem System existiert. Erstellen Sie ihn, falls notwendig.
-- Kopieren Sie den Projektordner in `C:\data\`.
+- Stellen Sie sicher, dass der Ordner `C:\opt\` auf Ihrem System existiert. Erstellen Sie ihn, falls notwendig.
+- Kopieren Sie den Projektordner in `C:\opt\`.
 
 ### Konfigurationsdatei
 
@@ -32,7 +32,7 @@ Konfigurieren Sie die `config.json` im Hauptverzeichnis des Projekts mit folgend
 ```
 ### Desktop-Verknüpfung erstellen
 
-- Erstellen Sie eine Verknüpfung auf dem Desktop, die auf das VBScript `startJWLibrary.vbs` zeigt.
+- Erstellen Sie eine Verknüpfung auf dem Desktop, die auf das PowerShell Script `runJWLibrary.ps1` zeigt.
 - Geben Sie der Verknüpfung einen aussagekräftigen Namen, z.B. `Start JW Library`.
 
 ## Benutzung
